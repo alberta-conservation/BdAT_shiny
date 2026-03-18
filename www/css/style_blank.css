@@ -20,7 +20,7 @@ body {
 
 /* Fix markdown styling */
 #markdown-content {
-  width: 70%;                /* occupies 2/3 of the screen */
+  width: 70%;                /* Adjust as needed */
   font-family: Cambria, Georgia, serif;
   color: white !important;
   font-size: 18px !important;   /* Adjust this value as needed */

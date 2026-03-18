@@ -10,7 +10,7 @@ tagList(
       tags$head(tags$link(href = "css/style_blank.css", rel = "stylesheet")
       )
     ),
-    title = HTML('<div style="margin-top: 0px;"><a href="https://github.com/alberta-conservation" target="_blank"><img src="abc-program-logo.png" height="80"></a></div>'),
+    title = HTML('<div style="margin-top: 0px;"><a href="https://github.com/alberta-conservation" target="_blank"><img src="abc-program-logo.png" height="50"></a></div>'),
     windowTitle = "OSR Biodiversity Assessment tool",
     tabPanel("Welcome", value = 'intro'),
     tabPanel("Species description", value = 'spp'),
@@ -19,7 +19,7 @@ tagList(
     tabPanel("Recommendations", value = 'recommendations')
   ), 
   tags$div(
-    useShinyjs(),
+    shinyjs::useShinyjs(),
     
     # Intro tab
     conditionalPanel(
@@ -45,6 +45,7 @@ tagList(
     )
   ),
   
+  # Layout for species tab
   conditionalPanel(
     condition = "input.tabs == 'spp' || input.tabs == 'vulnerability'",
     fluidRow(
@@ -52,14 +53,18 @@ tagList(
              conditionalPanel(
                condition = "input.tabs == 'spp'",
                div(id = "markdown-content", includeMarkdown("Rmd/text_spp_tab.md")))
-      ), 
-      column(12, 
-             conditionalPanel(
-               condition = "input.tabs == 'vulnerability'",
-               div(id = "markdown-content", includeMarkdown("Rmd/text_vulnerability_tab.md")))
       )
     )
+  ),
+  
+  # Layout for vulnerability tab 
+  conditionalPanel(
+    condition = "input.tabs == 'vulnerability'", 
+    fluidRow(
+      column(12, div(id = "markdown-content", includeMarkdown("Rmd/text_vulnerability_tab.md")))
+    )
   )
+  
 )
 
 
