@@ -61,7 +61,33 @@ tagList(
   conditionalPanel(
     condition = "input.tabs == 'vulnerability'", 
     fluidRow(
-      column(12, div(id = "markdown-content", includeMarkdown("Rmd/text_vulnerability_tab.md")))
+      column(3, 
+             fluidPage(
+               selectInput(
+                 inputId = "app_holder", 
+                 label = "Select a lease holder:", 
+                 choices = c("Canada Natural Resources Limited", "Suncor Energy Inc.", "Surmont Energy Ltd."), 
+                 selected = "Suncor Energy Inc."
+               ), 
+               checkboxGroupInput(
+                 inputId = "prod_field",
+                 label = "Choose the Oil Sands Area:",
+                 choices = c("Athabasca", "Cold Lake", "Peace River Area 1", "Peace River Area 2"),
+                 selected = "Athabasca" # Optional: pre-select an item
+               ),
+               actionButton(inputId = "co_prodField", label = "Show selected AOI and leases", icon = icon(name = "fas fa-crow", lib = "font-awesome"), style="width:250px")
+             )
+             ), 
+      column(6, 
+             leafletOutput(outputId = "map", width = "100%", height = "400px") 
+      ), 
+      column(3, 
+             div(id = "markdown-content", includeMarkdown("Rmd/data_download_tab.md")), 
+             actionButton(inputId = "dwnld_dta", label = "Download Data", icon = icon(name = "fas fa-crow", lib = "font-awesome"), tyle="width:250px")
+             ), 
+      column(12,  
+             div(id = "markdown-content", includeMarkdown("Rmd/text_vulnerability_tab.md"))
+      )
     )
   )
   

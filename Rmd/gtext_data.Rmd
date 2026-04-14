@@ -1,0 +1,14 @@
+---
+title: "data"
+output: html_document
+---
+
+The 'Exposure' tool allows users to view the distribution of the species within BCR 6 and access the exposure metrics at the OSR-level and at the level of the individual lease. 
+
+##### Species selection
+Use the left hand side of the 'Exposure' tool to select the species for assessment.
+
+- **Step 1.** Select the species of interest from the dropdown list. 
+
+- **Step 2.** Use the interactive map to view the species distribution and select lease areas to veiw exposure metrics. 
+

@@ -20,8 +20,8 @@ There are three distinct components of the OSR Biodiversity Assessment Tool:
 
 **1. Species Description:** A dropdown list allows users to select a species; then provides a general description of the species selected, with habitat associations, regional Partners in Flight (PIF) status, and Committee on the Status of Endangered Wildlife in Canada (COSEWIC) assessment, if any. Asessemnts of the selected species are then populated to the other tabs.
 
-**2. Exposure and Sensitivity:** Quantification of the population-level spatial exposure to oil sands disturbance for the selected species, including for current oil sands lease areas, and a brief literature review of known or inferred responses to typical oil sands disturbances. 
-
-**4. Vulnerability Assessment:** Estimates of species OSR-level and lease-level vulnerabilities based on exposure and known sensitivities. This includes sensitivity factors of habitat loss, edge avoidance, response to small canopy gaps, and potential fragmentation effects. 
+**2. Vulnerability:** Quantification of the population-level spatial exposure to oil sands disturbance for the selected species, including for current oil sands lease areas, and a brief literature review of known or inferred responses to typical oil sands disturbances. This includes sensitivity factors of habitat loss, edge avoidance, response to small canopy gaps, and potential fragmentation effects. 
 
 **4. Risk Assessment:** If available, model-based estimates of the probability (i.e. *Risk*) of specific levels of population loss under different scenarios of oil sands development and assumptions about other disturbance and succession processes. 
+
+**4. Recommendations:** Recommendations for mitigating risks to species populations based on known sensitivities and risk levels, based on the mitigation hierarchy (Avoid, Minimize, Remediate, Offset) 
