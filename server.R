@@ -43,7 +43,7 @@ server <- function(input, output, session){
     
     labels <- sprintf(
       "<strong>Lease holder: %s</strong><br/>Lease no: %s<strong><br/>Lease pop: %s</strong><br/>OSR prop: %s</strong><br/>OSR index: %s",
-      cf$lease_hold, cf$lease, cf$lease_pop, cf$pop_prop, cf$index
+      cf_pt$lease_hold, cf_pt$lease, cf_pt$lease_pop, cf_pt$pop_prop, cf$index
     ) %>% lapply(htmltools::HTML)
 
     leafletProxy("map") |> 
@@ -67,11 +67,11 @@ server <- function(input, output, session){
         weight = 2, 
         color = "yellow", 
         dashArray = "3", 
-        label = ~labels
+        label = ~lease
       ) |> 
       addMarkers(
         data = cf_pt, 
-        label = ~lease
+        label = ~labels
       )
   })
   
