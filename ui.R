@@ -52,7 +52,7 @@ tagList(
       column(12, 
              conditionalPanel(
                condition = "input.tabs == 'spp'",
-               div(id = "markdown-content", includeMarkdown("Rmd/text_spp_tab.md")))
+               div(id = "markdown-content", includeMarkdown("Rmd/text_spp_btnw.md")))
       )
     )
   ),

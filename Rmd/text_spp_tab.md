@@ -1,9 +1,9 @@
 <left>
 
-# Species Information: Black-throated Green Warbler
+## Species Information: Black-throated Green Warbler (*)
 
 
-![](../www/btnw.jpg)
+![](../www/btnw.jpg){width = 50%}
 
 <br>
 
