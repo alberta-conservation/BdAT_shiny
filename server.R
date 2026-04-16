@@ -13,7 +13,8 @@ server <- function(input, output, session){
     input$tabs
   })
   osr <- st_transform(st_read("www/data/oil_sands_areas.shp"), crs = 4326)[-5, ]
-  btnw <- st_transform(st_read("www/data/btnw_exposure.shp"), crs = 4326)
+  btnw <- st_transform(readRDS("www/data/btnw_exposure.rds"), crs = 4326)
+  btnw_current <- st_transform(readRDS("www/data/btnw_exposure_current.rds"), crs = 4326)
   output$map <- renderLeaflet({
     r <- rast("www/data/BTNW_can61_2020.tif")
     pal <- colorNumeric(palette = "Spectral", domain = values(r), na.color = "transparent")
@@ -34,16 +35,36 @@ server <- function(input, output, session){
       )
   })
   
+  output$map_current <- renderLeaflet({
+    rc <- rast("www/data/BlackthroatedGreenWarbler_osr_current.tif")
+    pal <- colorNumeric(palette = "Spectral", domain = values(rc), na.color = "transparent")
+    leaflet() %>%
+      addMapPane(name = "ground", zIndex=380) %>%
+      addProviderTiles("CartoDB.Positron", group="baseMap") %>%
+      # Fit bounds to BCR 6S extent
+      fitBounds(lng1 = -117.91614, lat1 = 53.54062, -110.00558, lat2 = 57.99188) |> 
+      addRasterImage(rc$Species, colors = "viridis", opacity = 0.8)
+  })
+  
+  
   observeEvent(input$co_prodField, {
     r1 <- rast("www/data/BlackthroatedGreenWarbler_osr_reference.tif")
+    rc <- rast("www/data/BlackthroatedGreenWarbler_osr_current.tif")
     pf <- osr |> filter(Area_Name == "Athabasca")
     b <- st_bbox(osr)
-    cf <- btnw |> filter(lease_hold == "Suncor Energy Inc." & osa == "ATHABASCA")
+    cf <- btnw |> filter(lease_holder == "Suncor Energy Inc." & osa == "ATHABASCA")
     cf_pt <- st_centroid(cf)
+    cfc <- btnw_current |> filter(lease_holder == "Suncor Energy Inc." & osa == "ATHABASCA")
+    cfc_pt <- st_centroid(cfc)
     
     labels <- sprintf(
-      "<strong>Lease holder: %s</strong><br/>Lease no: %s<strong><br/>Lease pop: %s</strong><br/>OSR prop: %s</strong><br/>OSR index: %s",
-      cf_pt$lease_hold, cf_pt$lease, cf_pt$lease_pop, cf_pt$pop_prop, cf$index
+      "<strong>Lease holder: %s</strong><br/>Lease no: %s<strong><br/>Lease pop: %s</strong><br/>OSR pct: %s</strong><br/>OSR index: %s",
+      cf_pt$lease_holder, cfc_pt$lease, cfc_pt$lease_pop, cfc_pt$pop_pct, cf$index
+    ) %>% lapply(htmltools::HTML)
+    
+    labels_current <- sprintf(
+      "<strong>Lease holder: %s</strong><br/>Lease no: %s<strong><br/>Lease pop: %s</strong><br/>OSR pct: %s</strong><br/>OSR index: %s",
+      cfc_pt$lease_holder, cf_pt$lease, cf_pt$lease_pop, cf_pt$pop_pct, cf$index
     ) %>% lapply(htmltools::HTML)
 
     leafletProxy("map") |> 
@@ -72,6 +93,34 @@ server <- function(input, output, session){
       addMarkers(
         data = cf_pt, 
         label = ~labels
+      )
+    
+    leafletProxy("map_current") |> 
+      clearShapes() |> 
+      addMapPane(name = "ground", zIndex=380) |> 
+      addProviderTiles("CartoDB.Positron", group="baseMap") |> 
+      fitBounds(lng1 = -117.91614, lat1 = 53.54062, -110.00558, lat2 = 57.99188) |> 
+      addRasterImage(rc$Species, colors = "viridis", opacity = 0.8) |> 
+      addPolygons(
+        data = pf, 
+        fillColor = NA, 
+        fillOpacity = 0,
+        weight = 4, 
+        color = "red", 
+        dashArray = "3"
+      ) |> 
+      addPolygons(
+        data = cfc, 
+        fillColor = NA, 
+        fillOpacity = 0,
+        weight = 2, 
+        color = "yellow", 
+        dashArray = "3", 
+        label = ~lease
+      ) |> 
+      addMarkers(
+        data = cfc_pt, 
+        label = ~labels_current
       )
   })
   

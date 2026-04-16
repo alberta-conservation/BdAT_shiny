@@ -46,7 +46,7 @@ runtime: shiny
 
 ## Overview
 
-The black-throated green warbler (BTNW) is a forest songbird species that is generally uncommon in the OSR. This species is most strongly associated with mature mixedwood and white spruce stands in the boreal forest and foothills regions of Alberta. Because of their dependence on mature, closed canopy forests and negative response to fragmentation, BTNW populations are sensitive to forest harvest, oil sands disturbances, and other forms of industrial development. Due to perceived population declines and expected future habitat loss, BTNW are considered a species of special concern in Alberta. 
+The black-throated green warbler (BTNW) is a migratory forest songbird species that is generally uncommon in the OSR. This species is most strongly associated with mature mixedwood and white spruce stands in the boreal forest and foothills regions of Alberta. Because of their dependence on mature, closed canopy forests and negative response to fragmentation, BTNW populations are sensitive to forest harvest, oil sands disturbances, and other forms of industrial development. Due to perceived population declines and expected future habitat loss, BTNW are considered a species of special concern in Alberta. 
 
 <br> 
 

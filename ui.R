@@ -18,7 +18,9 @@ tagList(
     tabPanel("Risk Assessment", value = 'risk'),
     tabPanel("Recommendations", value = 'recommendations')
   ), 
+  
   tags$div(
+    
     shinyjs::useShinyjs(),
     
     # Intro tab
@@ -52,7 +54,7 @@ tagList(
       column(12, 
              conditionalPanel(
                condition = "input.tabs == 'spp'",
-               div(id = "markdown-content", includeMarkdown("Rmd/text_spp_btnw.md")))
+               div(id = "markdown-content", includeMarkdown("Rmd/text_spp_btnw.Rmd")))
       )
     )
   ),
@@ -79,7 +81,14 @@ tagList(
              )
              ), 
       column(6, 
-             leafletOutput(outputId = "map", width = "100%", height = "400px") 
+             tabsetPanel(id ="centerPanel",
+                         tabPanel("Reference Exposre", 
+                                  leafletOutput(outputId = "map", width = "100%", height = "400px") 
+                         ),
+                         tabPanel("Current Exposure",
+                                  leafletOutput(outputId = "map_current", width = "100%", height = "400px")
+                         ) 
+             )
       ), 
       column(3, 
              div(id = "markdown-content", includeMarkdown("Rmd/data_download_tab.md")), 
