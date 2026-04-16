@@ -29,7 +29,6 @@ tagList(
       div(style = "background-color: white; width: 100vw; margin: 0; padding: 0; display: flex; justify-content: center;",
           tags$img(src = "osr.png", height = "300px",  style = "display: block; object-fit: contain; width: 100%; max-width: none;")),
       
-      
       fluidRow(
         column(3, layout_sidebar(
           sidebar = sidebar(
@@ -44,12 +43,11 @@ tagList(
         
         column(9, div(id = "markdown-content", includeMarkdown("Rmd/text_intro_tab.md")))
       )
-    )
-  ),
+    ), 
   
   # Layout for species tab
   conditionalPanel(
-    condition = "input.tabs == 'spp' || input.tabs == 'vulnerability'",
+    condition = "input.tabs == 'spp'",
     fluidRow(
       column(12, 
              conditionalPanel(
@@ -61,45 +59,102 @@ tagList(
   
   # Layout for vulnerability tab 
   conditionalPanel(
-    condition = "input.tabs == 'vulnerability'", 
+    condition = "input.tabs == 'vulnerability' || input.tabs == 'risk'", 
     fluidRow(
       column(3, 
-             fluidPage(
-               selectInput(
-                 inputId = "app_holder", 
-                 label = "Select a lease holder:", 
-                 choices = c("Canada Natural Resources Limited", "Suncor Energy Inc.", "Surmont Energy Ltd."), 
-                 selected = "Suncor Energy Inc."
+             conditionalPanel(
+               condition = "input.tabs == 'vulnerability'", 
+               tabsetPanel(
+                 tabPanel("Tool", 
+                          selectInput(
+                            inputId = "app_holder", 
+                            label = "Select a lease holder:", 
+                            choices = c("Canada Natural Resources Limited", "Suncor Energy Inc.", "Surmont Energy Ltd."), 
+                            selected = "Suncor Energy Inc."
+                          ), 
+                          checkboxGroupInput(
+                            inputId = "prod_field",
+                            label = "Choose the Oil Sands Area:",
+                            choices = c("Athabasca", "Cold Lake", "Peace River Area 1", "Peace River Area 2"),
+                            selected = "Athabasca" # Optional: pre-select an item
+                          ),
+                          actionButton(inputId = "co_prodField", 
+                                       label = "Show selected AOI and leases", 
+                                       icon = icon(name = "fas fa-crow", lib = "font-awesome"), 
+                                       style="width:200px")
+                 ), 
+                 tabPanel("Instructions", 
+                          icon = icon("circle-info"), 
+                          div(style = "color: white !important; font-size: 14px; font-family: 'Cormorant Garamond', serif;", 
+                              includeMarkdown("./Rmd/gtext_data.Rmd")
+                          )
+                 )
+               )
                ), 
-               checkboxGroupInput(
-                 inputId = "prod_field",
-                 label = "Choose the Oil Sands Area:",
-                 choices = c("Athabasca", "Cold Lake", "Peace River Area 1", "Peace River Area 2"),
-                 selected = "Athabasca" # Optional: pre-select an item
-               ),
-               actionButton(inputId = "co_prodField", label = "Show selected AOI and leases", icon = icon(name = "fas fa-crow", lib = "font-awesome"), style="width:250px")
+             conditionalPanel(
+               condition = "input.tabs == 'risk'", 
+               fluidPage(
+                 selectInput(
+                   inputId = "app_holder", 
+                   label = "Select a lease holder:", 
+                   choices = c("Canada Natural Resources Limited", "Suncor Energy Inc.", "Surmont Energy Ltd."), 
+                   selected = "Suncor Energy Inc."
+                 ), 
+                 checkboxGroupInput(
+                   inputId = "prod_field",
+                   label = "Choose the Oil Sands Area:",
+                   choices = c("Athabasca", "Cold Lake", "Peace River Area 1", "Peace River Area 2"),
+                   selected = "Cold Lake" # Optional: pre-select an item
+                 ),
+                 actionButton(inputId = "co_prodField", label = "Show risk for selected areas(s)", icon = icon(name = "fas fa-crow", lib = "font-awesome"), style="width:200px")
+               )
              )
              ), 
       column(6, 
-             tabsetPanel(id ="centerPanel",
-                         tabPanel("Reference Exposre", 
-                                  leafletOutput(outputId = "map", width = "100%", height = "400px") 
-                         ),
-                         tabPanel("Current Exposure",
-                                  leafletOutput(outputId = "map_current", width = "100%", height = "400px")
-                         ) 
+             conditionalPanel(
+               condition = "input.tabs == 'vulnerability'", 
+               tabsetPanel(id ="centerPanel",
+                           tabPanel("Reference Exposure", 
+                                    leafletOutput(outputId = "map", width = "100%", height = "400px") 
+                           ),
+                           tabPanel("Current Exposure",
+                                    leafletOutput(outputId = "map_current", width = "100%", height = "400px")
+                           ) 
+               )
+             ), 
+             conditionalPanel(
+               condition = "input.tabs == 'risk'", 
+               tabsetPanel(
+                           tabPanel("Density distributions", 
+                                    tags$img(src = "data/oven_density.png", width = "100%", height = "auto")
+                           ),
+                           tabPanel("Risk estimates",
+                                    tags$img(src = "data/oven_decline_5pct.png", width = "100%", height = "auto")
+                           ) 
+               )
              )
       ), 
       column(3, 
-             div(id = "markdown-content", includeMarkdown("Rmd/data_download_tab.md")), 
-             actionButton(inputId = "dwnld_dta", label = "Download Data", icon = icon(name = "fas fa-crow", lib = "font-awesome"), tyle="width:250px")
+             conditionalPanel(
+               condition = "input.tabs == 'vulnerability'",
+               div(id = "markdown-content", includeMarkdown("Rmd/data_download_tab.md")), 
+               actionButton(inputId = "dwnld_dta", label = "Download Data", icon = icon(name = "fas fa-crow", lib = "font-awesome"), tyle="width:250px")
+             ), 
+             conditionalPanel(
+               condition = "input.tabs == 'risk'",
+               div(id = "markdown-content", includeMarkdown("Rmd/risk_download_tab.md")), 
+               actionButton(inputId = "dwnld_dta", label = "Download Data", icon = icon(name = "fas fa-crow", lib = "font-awesome"), tyle="width:250px")
+             )
              ), 
       column(12,  
-             div(id = "markdown-content", includeMarkdown("Rmd/text_vulnerability_tab.md"))
+             conditionalPanel(
+               condition = "input.tabs == 'vulnerability'",
+               div(id = "markdown-content", includeMarkdown("Rmd/text_vulnerability_tab.md"))
+               )
       )
     )
   )
-  
+  )
 )
 
 
