@@ -36,12 +36,18 @@ tagList(
             selectInput(
               "spp",
               "Select a species:",
-              choices = c("Black-throated green warbler")
+              choices = c("Black-throated Green Warbler" = "btnw", 
+                          "Ovenbird" = "oven", 
+                          "Canada Warbler" = "cawa", 
+                          "Swainson's Thrush" = "swth", 
+                          "Ruby-crowned Kinglet" = "rcki", 
+                          "Alder Flycatcher" = "alfl"),
+              selected = "btnw"
             )
           )
         )),
         
-        column(9, div(id = "markdown-content", includeMarkdown("Rmd/text_intro_tab.md")))
+        column(9, div(id = "markdown-content", includeMarkdown("Rmd/text_intro_tab.Rmd")))
       )
     ), 
   
@@ -66,18 +72,18 @@ tagList(
                condition = "input.tabs == 'vulnerability'", 
                tabsetPanel(
                  tabPanel("Tool", 
-                          selectInput(
-                            inputId = "app_holder", 
-                            label = "Select a lease holder:", 
-                            choices = c("Canada Natural Resources Limited", "Suncor Energy Inc.", "Surmont Energy Ltd."), 
-                            selected = "Suncor Energy Inc."
-                          ), 
                           checkboxGroupInput(
                             inputId = "prod_field",
                             label = "Choose the Oil Sands Area:",
-                            choices = c("Athabasca", "Cold Lake", "Peace River Area 1", "Peace River Area 2"),
+                            choices = c("All", "Athabasca", "Cold Lake", "Peace River Area 1", "Peace River Area 2"),
                             selected = "Athabasca" # Optional: pre-select an item
-                          ),
+                          ), 
+                          selectInput(
+                            inputId = "app_holder", 
+                            label = "Select a lease holder:", 
+                            choices = c("All", "Canada Natural Resources Limited", "Suncor Energy Inc.", "Surmont Energy Ltd."), 
+                            selected = "Suncor Energy Inc."
+                          ), 
                           actionButton(inputId = "co_prodField", 
                                        label = "Show selected AOI and leases", 
                                        icon = icon(name = "fas fa-crow", lib = "font-awesome"), 
@@ -86,7 +92,7 @@ tagList(
                  tabPanel("Instructions", 
                           icon = icon("circle-info"), 
                           div(style = "color: white !important; font-size: 14px; font-family: 'Cormorant Garamond', serif;", 
-                              includeMarkdown("./Rmd/gtext_data.Rmd")
+                              includeMarkdown("./Rmd/gtext_exposure.Rmd")
                           )
                  )
                )

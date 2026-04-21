@@ -28,7 +28,9 @@ runtime: shiny
 
 ## **CONSERVATION STATUS**
 
-* <abbr title="Committee on the Status of Endangered Wildlife in Caada">COSEWIC</abbr> Status: None
+* <abbr title="Committee on the Status of Endangered Wildlife in Caada">COSEWIC</abbr> Status: None 
+
+* <abbr title="Partners in Flight">PIF</abbr> Regional Importance in BCR 6: [<span style="color: white;"><u>Common bird in steep decline</u></span>](https://app.bcr.eco/pif/#eyJsaXN0IjoiYWNhZCIsInJlZ2lvbiI6InJlZ2lvbmFsIiwiZmlsdGVycyI6W1t7ImZpZWxkIjoiQUktYiIsInR5cGUiOiIhPSIsInZhbHVlIjpudWxsfSx7ImZpZWxkIjoiQUktdyIsInR5cGUiOiIhPSIsInZhbHVlIjpudWxsfSx7ImZpZWxkIjoiQUktbSIsInR5cGUiOiIhPSIsInZhbHVlIjpudWxsfV0seyJmaWVsZCI6IkJDUiIsInR5cGUiOiJpbiIsInZhbHVlIjpbIjYiXX0seyJmaWVsZCI6IkNvbW1vbiBOYW1lIiwidHlwZSI6Imxpa2UiLCJ2YWx1ZSI6ImJsYWNrLXRocm8ifV0sInNvcnRlcnMiOnsiVEItciI6ImFzYyJ9LCJzcGVjaWVzX29mX2ltcG9ydGFuY2UiOmZhbHNlfQ==)
 
 * <abbr title="Alberta's Endangered Species Conservation Committee">ESCC</abbr> Status in  Alberta: Special Concern 
 

@@ -1,5 +1,5 @@
 ---
-title: "data"
+title: "exposure"
 output: html_document
 ---
 
@@ -8,9 +8,9 @@ The 'Exposure' tool allows users to view the distribution of the species within 
 ##### Lease holder and area of interest (AOI) selection
 Use the left hand side of the 'Exposure' tool to select the species for assessment.
 
-- **Step 1.** Select the lease holder from the dropdown list. 
+- **Step 1.** Select the AOI from the checklist (The Production Fields can be viewed on the initial map by hovering over it with the curser). 
 
-- **Step 2.** Select the AOI from the checklist (The Production Fields can be viewed on the initial map). 
+- **Step 2.** Select the lease holder from the dropdown list. The list of lease holders should only include those in the selected AOI. 
 
 - **Step 3.** Use the interactive map to view the species distribution and select lease areas to veiw exposure metrics. 
 
