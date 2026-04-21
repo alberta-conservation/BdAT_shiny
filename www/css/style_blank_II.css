@@ -32,3 +32,17 @@ h1, h2, h3 {
   font-family: Cambria, Georgia, serif;
     color: white !important;
 }
+
+.nav-tabs .nav-link:hover {
+  background-color: white; /* Slightly lighter when hovered */
+}
+
+.nav-tabs {
+  border-bottom: 2px solid white; /* Border under tabs */
+}
+
+.nav-tabs .nav-link {
+  background-color: rgb(108, 94, 156); /* Inactive tabs */
+  color: white;
+}
+

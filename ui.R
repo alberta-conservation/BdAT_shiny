@@ -7,7 +7,7 @@ tagList(
     
     # Describes the top header bar with tabs
     header = tagList(
-      tags$head(tags$link(href = "css/style_blank.css", rel = "stylesheet")
+      tags$head(tags$link(href = "css/style_blank_II.css", rel = "stylesheet")
       )
     ),
     title = HTML('<div style="margin-top: 0px;"><a href="https://github.com/alberta-conservation" target="_blank"><img src="abc-program-logo.png" height="50"></a></div>'),
