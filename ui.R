@@ -63,7 +63,7 @@ tagList(
     )
   ),
   
-  # Layout for vulnerability tab 
+  # Layout for vulnerability and risk tab s
   conditionalPanel(
     condition = "input.tabs == 'vulnerability' || input.tabs == 'risk'", 
     fluidRow(
@@ -168,6 +168,18 @@ tagList(
                condition = "input.tabs == 'vulnerability'",
                div(id = "markdown-content", includeMarkdown("Rmd/text_vulnerability_tab.md"))
                )
+      )
+    )
+  ),
+  
+  # Layout for species tab
+  conditionalPanel(
+    condition = "input.tabs == 'recommendations'",
+    fluidRow(
+      column(12, 
+             conditionalPanel(
+               condition = "input.tabs == 'recommendations'",
+               div(id = "markdown-content", includeMarkdown("Rmd/text_mitigation_btnw.Rmd")))
       )
     )
   )
