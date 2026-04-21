@@ -99,20 +99,31 @@ tagList(
                ), 
              conditionalPanel(
                condition = "input.tabs == 'risk'", 
-               fluidPage(
-                 selectInput(
-                   inputId = "app_holder", 
-                   label = "Select a lease holder:", 
-                   choices = c("Canada Natural Resources Limited", "Suncor Energy Inc.", "Surmont Energy Ltd."), 
-                   selected = "Suncor Energy Inc."
+               tabsetPanel(
+                 tabPanel("Tool", 
+                          checkboxGroupInput(
+                            inputId = "prod_field",
+                            label = "Choose the Oil Sands Area:",
+                            choices = c("All", "Athabasca", "Cold Lake", "Peace River Area 1", "Peace River Area 2"),
+                            selected = "Athabasca" # Optional: pre-select an item
+                          ), 
+                          selectInput(
+                            inputId = "app_holder", 
+                            label = "Select a lease holder:", 
+                            choices = c("All", "Canada Natural Resources Limited", "Suncor Energy Inc.", "Surmont Energy Ltd."), 
+                            selected = "Suncor Energy Inc."
+                          ), 
+                          actionButton(inputId = "co_prodField", 
+                                       label = "Show selected AOI and leases", 
+                                       icon = icon(name = "fas fa-crow", lib = "font-awesome"), 
+                                       style="width:200px")
                  ), 
-                 checkboxGroupInput(
-                   inputId = "prod_field",
-                   label = "Choose the Oil Sands Area:",
-                   choices = c("Athabasca", "Cold Lake", "Peace River Area 1", "Peace River Area 2"),
-                   selected = "Cold Lake" # Optional: pre-select an item
-                 ),
-                 actionButton(inputId = "co_prodField", label = "Show risk for selected areas(s)", icon = icon(name = "fas fa-crow", lib = "font-awesome"), style="width:200px")
+                 tabPanel("Instructions", 
+                          icon = icon("circle-info"), 
+                          div(style = "color: white !important; font-size: 14px; font-family: 'Cormorant Garamond', serif;", 
+                              includeMarkdown("./Rmd/gtext_risk.Rmd")
+                          )
+                 )
                )
              )
              ), 

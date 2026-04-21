@@ -1,9 +1,9 @@
 ---
-title: "data"
+title: "risk"
 output: html_document
 ---
 
-The 'Exposure' tool allows users to view the distribution of the species within BCR 6 and access the exposure metrics at the OSR-level and at the level of the individual lease. 
+The risk assessment tool allows users to view the potential population outcomes (Density Distributions) and risks of a range of percentages of population decline (Risk Estimates) under different climate and land-use scenarios, relative to a baseline scenario of no oil sands development and historic climate, for the selected species. 
 
 ##### Lease holder and area of interest (AOI) selection
 Use the left hand side of the 'Exposure' tool to select the species for assessment.
