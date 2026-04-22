@@ -136,7 +136,10 @@ tagList(
                            ),
                            tabPanel("Current Exposure",
                                     leafletOutput(outputId = "map_current", width = "100%", height = "400px")
-                           ) 
+                           ), 
+                           tabPanel("Methods", 
+                                    div(id = "markdown-content", includeMarkdown("Rmd/text_vulnerability_methods.Rmd"))
+                          )
                )
              ), 
              conditionalPanel(
@@ -147,7 +150,10 @@ tagList(
                            ),
                            tabPanel("Risk estimates",
                                     tags$img(src = "data/oven_decline_5pct.png", width = "100%", height = "auto")
-                           ) 
+                           ) , 
+                           tabPanel("Methods", 
+                                    div(id = "markdown-content", includeMarkdown("Rmd/text_risk_methods.Rmd"))
+                           )
                )
              )
       ), 
