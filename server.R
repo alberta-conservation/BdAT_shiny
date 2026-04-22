@@ -15,16 +15,33 @@ server <- function(input, output, session){
   osr <- st_transform(st_read("www/data/oil_sands_areas.shp"), crs = 4326)[-5, ]
   btnw <- st_transform(readRDS("www/data/btnw_exposure.rds"), crs = 4326)
   btnw_current <- st_transform(readRDS("www/data/btnw_exposure_current.rds"), crs = 4326)
+  bcr <- st_transform(st_read("www/data/BCR6S.shp"), crs = 4326)
+  bcr_exp <- st_transform(readRDS("www/data/bcr_exposure.rds"), crs = 4326)
+  
+  labels_bcr6s <- sprintf(
+    "<strong>BCR 6S pop: %s</strong><br/>OSR pop: %s<strong><br/>OSR pct: %s</strong><br/>OSR index: %s",
+    bcr_exp$bcr_pop, bcr_exp$osr_pop, bcr_exp$osr_pct, bcr_exp$osr_index
+  ) %>% lapply(htmltools::HTML)
+  
   output$map <- renderLeaflet({
     r <- rast("www/data/BTNW_can61_2020.tif")
     pal <- colorNumeric(palette = "Spectral", domain = values(r), na.color = "transparent")
-    leaflet(osr) %>%
+    leaflet() %>%
       addMapPane(name = "ground", zIndex=380) %>%
       addProviderTiles("CartoDB.Positron", group="baseMap") %>%
       # Fit bounds to BCR 6S extent
       fitBounds(lng1 = -116.0, lat1 = 50, lng2 = -105.0, lat2 = 58) |> 
       addRasterImage(r$mean, colors = "viridis", opacity = 0.8) |> 
       addPolygons(
+        data = bcr_exp, 
+        fillColor = NA, 
+        fillOpacity = 0, 
+        weight = 1, 
+        color = "black", 
+        label = ~labels_bcr6s
+      ) |> 
+      addPolygons(
+        data = osr, 
         fillColor = NA, 
         fillOpacity = 0,
         weight = 4, 
